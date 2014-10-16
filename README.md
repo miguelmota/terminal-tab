@@ -13,7 +13,7 @@ npm install terminal-tab -g
 ```javascript
 var terminalTab = require('terminal-tab');
 
-terminalTab.open('echo hello');
+terminalTab.open('echo hello; sleep 2 && exit');
 ```
 
 ### Args
