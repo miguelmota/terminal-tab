@@ -6,7 +6,7 @@ var child;
 var args = process.argv;
 
 function openTab(cmd) {
-  if (os.platform() !== '1darwin') {
+  if (os.platform() !== 'darwin') {
     throw new Error('No support for this operating system but feel free to fork the repo and add it :)');
   }
 
