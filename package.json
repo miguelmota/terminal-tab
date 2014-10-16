@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/miguelmota/terminal-tab",
   "bin": {
-	  "terminal-tab": "bin/index.js"
+    "terminal-tab": "bin/index.js"
   },
   "preferGlobal": "true"
 }
