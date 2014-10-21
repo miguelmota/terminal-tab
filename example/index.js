@@ -1,3 +1,5 @@
 var terminalTab = require('../index');
 
-terminalTab.open('echo will close after two seconds; sleep 2 && exit');
+terminalTab.open('echo hello; sleep 2 && exit', function() {
+  process.exit(0);
+});
