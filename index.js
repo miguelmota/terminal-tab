@@ -1,36 +1,11 @@
 const child_process = require('child_process');
 const through = require('through');
 const os = require('os');
+const { platform } = require('./utils/platform');
+const { open, defaultConfig } = require('./utils/config');
 
-let child,
-	platform;
-const open = {
-	mac: cmd => [
-		`osascript -e 'tell application "Terminal" to activate' -e 'tell application "System Events" to tell process "Terminal" to keystroke "t" using command down' `,
-		`-e 'tell application "Terminal" to do script `,
-		`"${cmd}" `,
-		`in selected tab of the front window'`].join(''),
-	linux: () => {},
-	win: cmd => `start cmd.exe /K ${cmd}`
-}
+let child;
 const args = process.argv;
-const defaultConfig = {
-	stdoutCb: () => {},
-	stderrCb: () => {},
-	errorCb: () => {},
-	exitCb: () => {}
-}
-
-switch (os.platform()) {
-	case 'darwin':
-		platform = 'mac';
-		break;
-	case 'win32':
-		platform = 'win';
-		break;
-	default:
-		platform = 'linux';
-}
 
 function openTab(cmd, option = {}, cbOrConfig = defaultConfig) {
 	// let config = {}
