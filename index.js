@@ -1,51 +1,49 @@
-var exec = require('child_process').exec;
-var through = require('through');
-var os = require('os');
-var child;
+const child_process = require('child_process')
+const through = require('through')
+const os = require('os')
+const { platform } = require('./utils/platform')
+const { open, defaultConfig } = require('./utils/config')
 
-var args = process.argv;
+let child
+const args = process.argv
 
-function openTab(cmd, cb) {
-  if (os.platform() !== 'darwin') {
-    throw new Error('No support for this operating system but feel free to fork the repo and add it :)');
+const openTab = (cmd, option = {}, cbOrConfig = defaultConfig) => {
+  if (typeof cbOrConfig === 'object' && cbOrConfig !== null) {
+    cbOrConfig = Object.assign({}, defaultConfig, cbOrConfig)
+  } else if (typeof cbOrConfig === 'function') {
+    cbOrConfig = Object.assign({}, defaultConfig, {
+      onStdout: cbOrConfig
+    });
   }
 
-  var open = ['osascript -e \'tell application "Terminal" to activate\' ',
-           '-e \'tell application "System Events" to tell process "Terminal" to keystroke "t"',
-           'using command down\' ',
-           '-e \'tell application "Terminal" to do script',
-           '"', cmd, '"',
-           'in selected tab of the front window\''].join('');
-
-  child = exec(open, function(error, stdout, stderr) {
+  child = child_process.exec(open[platform](cmd), option, (error, stdout, stderr) => {
     if (error) {
-
+      cbOrConfig.onError(error)
+      return
     }
 
-    if (cb && typeof cb === 'function') {
-      cb.call(null, arguments);
-    }
-
+    cbOrConfig.onStdout(stdout)
+    cbOrConfig.onStderr(stderr)
   });
 
-  child.on('exit', function(code) {
-
-  });
+  child.on('close', (code, signal) => {
+    // The 'close' event is emitted when the stdio streams of a child process have been closed. This is distinct from the 'exit' event, since multiple processes might share the same stdio streams.
+    cbOrConfig.onExit(code, signal)
+  })
 }
 
-process.stdin.setEncoding('utf8');
-
-process.stdin.pipe(through(function(buf) {
-  openTab(buf.toString());
-  process.exit(0);
-}, function() {
-}));
+process.stdin.setEncoding('utf8')
+process.stdin.pipe(through(buf => {
+    openTab(buf.toString())
+    process.exit(0)
+  }, () => {})
+);
 
 if (args.length > 2) {
-  openTab(args.slice(2).join(' '));
-  process.exit(0);
+  openTab(args.slice(2).join(' '))
+  process.exit(0)
 }
 
 module.exports = {
   open: openTab
-};
+}
