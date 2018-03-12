@@ -16,19 +16,21 @@ const terminalTab = require('terminal-tab')
 terminalTab.open(`echo "my command"; sleep 2 && exit`)
 ```
 
-### Options
+#### Options
+
+Child process command [options](https://nodejs.org/dist/latest-v8.x/docs/api/child_process.html#child_process_child_process_exec_command_options_callback):
 
 ```javascript
 const options = {
-	cwd: null,
-	env: null,
-	encoding: 'utf8'
+  cwd: null,
+  env: null,
+  encoding: 'utf8'
 }
 
 terminalTab.open(`echo "my command"`, options)
 ```
 
-### Event callbacks
+#### Event callbacks
 
 ```javascript
 terminalTab.open(`echo "my command"`, options, {
@@ -58,7 +60,7 @@ terminalTab.open(`echo "my command"`, (stdout) => {
 })
 ```
 
-[option](https://nodejs.org/dist/latest-v8.x/docs/api/child_process.html#child_process_child_process_exec_command_options_callback)
+## CLI
 
 ```bash
 terminal-tab 'echo hello'

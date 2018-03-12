@@ -7,12 +7,12 @@ const options = {
 }
 
 terminalTab.open(`echo "my command"`, options, {
-  onStdout: (std) => {
-    console.log(std)
+  onStdout: (stdout) => {
+    console.log(stdout)
     // process.exit(0)
   },
-  onStderr: (std) => {
-    console.log(std);
+  onStderr: (stderr) => {
+    console.log(stderr);
     // process.exit(1)
   },
   onError: (error) => {

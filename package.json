@@ -1,6 +1,6 @@
 {
   "name": "terminal-tab",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Open terminal tab programatically",
   "main": "index.js",
   "scripts": {
