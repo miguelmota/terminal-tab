@@ -47,17 +47,13 @@ terminalTab.open(`echo "my command"`, options, {
 Alternatively:
 
 ```javascript
-terminalTab.open(`echo "my command"`, options, (stdout) => {
-
-})
+terminalTab.open(`echo "my command"`, options, (stdout) => {})
 ```
 
 Without options:
 
 ```javascript
-terminalTab.open(`echo "my command"`, (stdout) => {
-
-})
+terminalTab.open(`echo "my command"`, (stdout) => {})
 ```
 
 ## CLI
