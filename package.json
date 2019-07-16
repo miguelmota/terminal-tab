@@ -1,6 +1,6 @@
 {
   "name": "terminal-tab",
-  "version": "0.0.8",
+  "version": "0.0.7",
   "description": "Open terminal tab programatically",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/miguelmota/terminal-tab",
   "bin": {
-    "terminal-tab": "bin/terminal-tab"
+    "terminal_tab": "bin/terminal_tab"
   },
   "preferGlobal": "true"
 }

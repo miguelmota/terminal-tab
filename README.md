@@ -59,13 +59,13 @@ terminalTab.open(`echo "my command"`, (stdout) => {})
 ## CLI
 
 ```bash
-terminal-tab 'echo hello'
+terminal_tab 'echo hello'
 ```
 
 ### Piping
 
 ```bash
-echo 'echo hello' | terminal-tab
+echo 'echo hello' | terminal_tab
 ```
 
 ## License
