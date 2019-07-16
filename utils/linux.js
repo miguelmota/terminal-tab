@@ -50,7 +50,7 @@ const isXtermEmulator = () =>  {
 
 const open = (cmd) => {
   if (isGnome()) {
-    return `gnome-terminal -e 'bash -c "${cmd};exec bash'`
+    return `gnome-terminal -e 'bash -c "${cmd};exec bash"'`
   } else if (isXterm()) {
     return `xterm -e 'bash -c "${cmd};exec bash"'`
   } else if (isXtermEmulator()) {
