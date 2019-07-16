@@ -1,4 +1,4 @@
-const { openLinux } = require('./linux')
+const { open: openLinux } = require('./linux')
 
 const open = {
   mac: cmd => [
