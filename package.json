@@ -1,6 +1,6 @@
 {
   "name": "terminal-tab",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Open terminal tab programatically",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "url": "https://github.com/miguelmota/sobel/blob/master/LICENSE.md"
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "through": "^2.3.6"
   },
   "devDependencies": {},

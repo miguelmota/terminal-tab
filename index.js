@@ -1,13 +1,14 @@
 const child_process = require('child_process')
-const through = require('through')
 const os = require('os')
+const through = require('through')
+const debounce = require('lodash.debounce')
 const { platform } = require('./utils/platform')
 const { open, defaultConfig } = require('./utils/config')
 
-let child
 const args = process.argv
 
 const openTab = (cmd, option = {}, cbOrConfig = defaultConfig) => {
+  let child
   if (typeof cbOrConfig === 'object' && cbOrConfig !== null) {
     cbOrConfig = Object.assign({}, defaultConfig, cbOrConfig)
   } else if (typeof cbOrConfig === 'function') {
@@ -45,5 +46,5 @@ if (args.length > 2) {
 }
 
 module.exports = {
-  open: openTab
+  open: debounce(openTab, 100, {leading: true})
 }
